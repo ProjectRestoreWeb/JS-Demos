@@ -1,0 +1,136 @@
+<!DOCTYPE html><html>
+<head>
+   
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDwmHW2GbuxcEOESdICcICULkmSbty25Mc",
+    authDomain: "project-restore-73cd4.firebaseapp.com",
+    databaseURL: "https://project-restore-73cd4.firebaseio.com",
+    projectId: "project-restore-73cd4",
+    storageBucket: "project-restore-73cd4.appspot.com",
+    messagingSenderId: "255065765593"
+  };
+  firebase.initializeApp(config);
+</script>
+</head>
+<body>
+    <button onclick="createUser()">Create User</button><br>
+        <button onclick="signIn()">Sign In</button><br>
+
+    <input type="text" id="email">
+        <label for="email">Email</label><br>
+        <input type="text" id="pass">
+        <label for="pass">Password</label>
+
+    
+    
+    
+    <script>
+        
+        firebase.auth().signOut().then(function() {
+                console.log("signed out");
+            
+        }).catch(function(error) {
+          // An error happened.
+        });
+        
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            console.log("signed in");
+              var user = firebase.auth().currentUser;
+            var name, email, uid;
+
+            if (user != null) {
+              name = user.displayName;
+              email = user.email;
+              uid = user.uid;  
+                console.log(name+" " + email + " " + uid);
+            }
+          } else {
+            // No user is signed in.
+          }
+        });
+        
+        function createUser() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("pass").value;
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log(errorCode + " " + errorMessage);
+            });
+        }
+        
+        function signIn() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("pass").value;
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+            });
+        }
+    </script>
+    
+    
+    
+    
+    
+    
+    <!--
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>
+        firebase.auth().signOut().then(function() {
+            console.log("signed out");
+        }).catch(function(error) {
+          // An error happened.
+        });
+        
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            console.log("Signed in");
+            var name = user.displayName;
+            var email = user.email;
+              var uid = user.uid;
+              console.log(name +"  " + email+ " " + uid);
+          } else {
+            // No user is signed in.
+          }
+        });
+        
+        function createUser() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("pass").value;
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log(errorCode + " "+ errorMessage);
+            });
+        }
+        
+        function signIn() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("pass").value;
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+            });
+        }
+        
+    </script>-->
+</body>
+</html>
